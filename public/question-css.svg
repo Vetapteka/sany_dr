@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">CSS color example</title>
+  <desc id="desc">A simple illustration of the CSS color property.</desc>
+  <rect width="960" height="420" fill="#f6f8fa"/>
+  <rect x="96" y="70" width="768" height="280" rx="8" fill="#1f2328"/>
+  <text x="142" y="145" fill="#c8d0d9" font-family="Consolas, monospace" font-size="34">.title {</text>
+  <text x="190" y="210" fill="#7dd3c7" font-family="Consolas, monospace" font-size="34">color: #24786c;</text>
+  <text x="142" y="275" fill="#c8d0d9" font-family="Consolas, monospace" font-size="34">}</text>
+  <circle cx="728" cy="208" r="58" fill="#24786c"/>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">HTML heading example</title>
+  <desc id="desc">A simple illustration of an HTML h1 heading.</desc>
+  <rect width="960" height="420" fill="#f6f8fa"/>
+  <rect x="82" y="64" width="796" height="292" rx="8" fill="#ffffff" stroke="#d7dde5" stroke-width="4"/>
+  <rect x="122" y="112" width="208" height="26" rx="6" fill="#e2764d"/>
+  <rect x="122" y="168" width="472" height="40" rx="8" fill="#24786c"/>
+  <rect x="122" y="236" width="660" height="22" rx="6" fill="#c8d0d9"/>
+  <rect x="122" y="278" width="520" height="22" rx="6" fill="#c8d0d9"/>
+  <text x="155" y="198" fill="#ffffff" font-family="Arial, sans-serif" font-size="34" font-weight="700">&lt;h1&gt;Заголовок&lt;/h1&gt;</text>
+</svg>

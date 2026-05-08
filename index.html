@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ультра квест</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="quiz">
+      <section class="quiz__panel start-screen" id="startScreen">
+        <p class="quiz__tag">Ультра квест</p>
+        <h1 class="start-screen__title">
+          Нужно угадать, какой подарок мы тебе подарим.
+        </h1>
+        <p class="start-screen__text">
+          Эти 4 котенка подготовили для тебя ультра квест. Вот котята слева направо.
+        </p>
+
+        <div class="kittens" aria-label="Котята, которые подготовили квест">
+          <img class="kittens__photo" src="public/me.jpg" alt="Первый котенок" />
+          <img class="kittens__photo" src="public/grisha.jpg" alt="Второй котенок" />
+          <img class="kittens__photo" src="public/egor.jpg" alt="Третий котенок" />
+          <img class="kittens__photo" src="public/ura.jpg" alt="Четвертый котенок" />
+        </div>
+
+        <button class="button button--primary button--wide" type="button" id="startButton">
+          Далее
+        </button>
+      </section>
+
+      <section class="quiz__panel ready-screen" id="readyScreen" hidden>
+        <p class="quiz__tag">Перед началом</p>
+        <h1 class="ready-screen__title">Ты готов?</h1>
+        <button class="button button--primary button--wide" type="button" id="readyButton">
+          Да
+        </button>
+      </section>
+
+      <section class="quiz__panel reveal-screen" id="revealScreen" hidden>
+        <p class="quiz__tag">Мини-пролог</p>
+        <img class="reveal-screen__photo" src="public/sany.jpg" alt="Саня" />
+        <h1 class="reveal-screen__title">Кто ты из Извне?</h1>
+        <button class="button button--primary button--wide" type="button" id="revealButton">
+          Узнать
+        </button>
+      </section>
+
+      <section class="quiz__panel" id="questionScreen" aria-labelledby="questionTitle" hidden>
+        <div class="quiz__top">
+          <div class="progress" aria-label="Прогресс теста">
+            <div class="progress__meta">
+              <span id="progressText">Вопрос 1 из 1</span>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress__track">
+              <div class="progress__bar" id="progressBar"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="quiz__tag" id="questionCategory">Тест</p>
+        <h1 class="quiz__question" id="questionTitle">Загрузка вопроса...</h1>
+
+        <figure class="quiz__image-wrap" id="questionImageWrap" hidden>
+          <img class="quiz__image" id="questionImage" src="" alt="" />
+        </figure>
+
+        <form class="answers" id="answersForm"></form>
+
+        <p class="quiz__status" id="statusText" aria-live="polite"></p>
+
+        <div class="quiz__actions">
+          <button class="button button--secondary" type="button" id="prevButton">
+            Назад
+          </button>
+          <button class="button button--primary" type="button" id="nextButton">
+            Далее
+          </button>
+        </div>
+      </section>
+
+      <section class="quiz__panel final-screen" id="finalScreen" hidden>
+        <div class="confetti confetti--left" aria-hidden="true"></div>
+        <div class="confetti confetti--right" aria-hidden="true"></div>
+
+        <p class="quiz__tag">Результат</p>
+        <img class="final-screen__photo" src="public/test1/11.jpg" alt="Бойд" />
+        <h1 class="final-screen__title">Поздравляем, ты Бойд!</h1>
+        <button class="button button--primary button--wide" type="button" id="finalButton">
+          Ого, прикольно
+        </button>
+      </section>
+    </main>
+
+    <script src="questions-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

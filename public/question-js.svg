@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">JavaScript event example</title>
+  <desc id="desc">A simple illustration of a JavaScript click event listener.</desc>
+  <rect width="960" height="420" fill="#f6f8fa"/>
+  <rect x="90" y="72" width="780" height="276" rx="8" fill="#ffffff" stroke="#d7dde5" stroke-width="4"/>
+  <rect x="148" y="156" width="214" height="86" rx="8" fill="#24786c"/>
+  <text x="204" y="211" fill="#ffffff" font-family="Arial, sans-serif" font-size="30" font-weight="700">click</text>
+  <path d="M414 198h148" fill="none" stroke="#e2764d" stroke-width="12" stroke-linecap="round"/>
+  <path d="M548 162l58 36-58 36" fill="none" stroke="#e2764d" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="638" y="210" fill="#1f2328" font-family="Consolas, monospace" font-size="30">addEventListener()</text>
+</svg>

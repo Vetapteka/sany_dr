@@ -1,0 +1,211 @@
+window.quizConfig = {
+  "questions": [
+    {
+      "id": "q1",
+      "category": "Извне",
+      "text": "Любишь улыбаться?",
+      "image": "public/test1/1.jpg",
+      "imageAlt": "Фото к вопросу 1",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "category": "Извне",
+      "text": "Как часто ты выкалываешь людям глаза?",
+      "image": "public/test1/2.webp",
+      "imageAlt": "Фото к вопросу 2",
+      "answers": [
+        {
+          "id": "often",
+          "text": "Часто"
+        },
+        {
+          "id": "not-often",
+          "text": "Не часто"
+        },
+        {
+          "id": "sometimes",
+          "text": "Иногда"
+        },
+        {
+          "id": "never",
+          "text": "Никогда"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "category": "Извне",
+      "text": "Любишь ли ты слушать, как поют маленькие дети?",
+      "image": "public/test1/3.webp",
+      "imageAlt": "Фото к вопросу 3",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "category": "Извне",
+      "text": "Носишь желтый костюм?",
+      "image": "public/test1/4.jpg",
+      "imageAlt": "Фото к вопросу 4",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "category": "Извне",
+      "text": "Дружишь с Джокером?",
+      "image": "public/test1/5.jpg",
+      "imageAlt": "Фото к вопросу 5",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "category": "Извне",
+      "text": "Как часто ты используешь фразу «нам надо поговорить»?",
+      "image": "public/test1/6.jpg",
+      "imageAlt": "Фото к вопросу 6",
+      "answers": [
+        {
+          "id": "often",
+          "text": "Часто"
+        },
+        {
+          "id": "not-often",
+          "text": "Не часто"
+        },
+        {
+          "id": "sometimes",
+          "text": "Иногда"
+        },
+        {
+          "id": "never",
+          "text": "Никогда"
+        },
+        {
+          "id": "talk",
+          "text": "Нам надо поговорить"
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "category": "Извне",
+      "text": "Ешь гниль?",
+      "image": "public/test1/7.webp",
+      "imageAlt": "Фото к вопросу 7",
+      "answers": [
+        {
+          "id": "often",
+          "text": "Часто"
+        },
+        {
+          "id": "not-often",
+          "text": "Не часто"
+        },
+        {
+          "id": "talk",
+          "text": "Нам надо поговорить"
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "category": "Извне",
+      "text": "Что ты сделаешь, если увидишь упавшее дерево посреди дороги?",
+      "image": "public/test1/8.jpg",
+      "imageAlt": "Фото к вопросу 8",
+      "answers": [
+        {
+          "id": "turn-back",
+          "text": "Повернусь и поеду обратно на шоссе"
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "category": "Извне",
+      "text": "Ты сексуальный молодой негор?",
+      "image": "public/test1/9.webp",
+      "imageAlt": "Фото к вопросу 9",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "category": "Извне",
+      "text": "Ты ебанутый?",
+      "image": "public/test1/10.webp",
+      "imageAlt": "Фото к вопросу 10",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "category": "Извне",
+      "text": "Веришь в волшебные камни?",
+      "image": "public/test1/11.jpg",
+      "imageAlt": "Фото к вопросу 11",
+      "answers": [
+        {
+          "id": "yes",
+          "text": "Да"
+        },
+        {
+          "id": "no",
+          "text": "Нет"
+        }
+      ]
+    }
+  ]
+};
