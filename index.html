@@ -9,12 +9,14 @@
   <body>
     <main class="quiz">
       <section class="quiz__panel start-screen" id="startScreen">
+        <button class="debug-toggle" type="button" id="debugToggle" aria-label="Включить дебаг"></button>
         <p class="quiz__tag">Ультра квест</p>
         <h1 class="start-screen__title">
           Нужно угадать, какой подарок мы тебе подарим.
         </h1>
         <p class="start-screen__text">
-          Эти 4 котенка подготовили для тебя ультра квест. Вот котята слева направо.
+          Эти 4 котенка подготовили для тебя ультра квест, который поможет понять,
+          что же мы тебе такое дарим.
         </p>
 
         <div class="kittens" aria-label="Котята, которые подготовили квест">
@@ -191,6 +193,9 @@
 
         <p class="quiz__tag">Тест 2</p>
         <h1 class="quiz__question" id="secondQuestionTitle">Загрузка вопроса...</h1>
+        <figure class="quiz__image-wrap" id="secondQuestionImageWrap" hidden>
+          <img class="quiz__image" id="secondQuestionImage" src="" alt="" />
+        </figure>
         <label class="text-answer">
           <span>Ответ</span>
           <input id="secondAnswerInput" type="text" autocomplete="off" />
@@ -206,9 +211,95 @@
           </button>
         </div>
       </section>
+
+      <section class="quiz__panel third-intro-screen" id="thirdIntroScreen" hidden>
+        <h1 class="third-intro-screen__title">
+          Легкая часть закончилась, переходим к сложной.
+        </h1>
+        <button class="button button--primary button--wide" type="button" id="thirdIntroButton">
+          Я готово
+        </button>
+      </section>
+
+      <section class="quiz__panel third-test-screen" id="thirdTestScreen" hidden>
+        <div class="quiz__top">
+          <div class="progress" aria-label="Прогресс третьего теста">
+            <div class="progress__meta">
+              <span id="thirdProgressText">Вопрос 1 из 10</span>
+              <span id="thirdProgressPercent">0%</span>
+            </div>
+            <div class="progress__track">
+              <div class="progress__bar" id="thirdProgressBar"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="quiz__tag">Твой характер (версия Лига Легенд)</p>
+        <h1 class="quiz__question" id="thirdQuestionTitle">Загрузка вопроса...</h1>
+        <form class="answers" id="thirdAnswersForm"></form>
+        <p class="quiz__status" id="thirdStatusText" aria-live="polite"></p>
+
+        <div class="quiz__actions">
+          <button class="button button--secondary" type="button" id="thirdPrevButton">
+            Назад
+          </button>
+          <button class="button button--primary" type="button" id="thirdNextButton">
+            Далее
+          </button>
+        </div>
+      </section>
+
+      <section class="quiz__panel brand-result-screen final-screen" id="brandResultScreen" hidden>
+        <div class="confetti confetti--left" aria-hidden="true"></div>
+        <div class="confetti confetti--right" aria-hidden="true"></div>
+
+        <p class="quiz__tag">Результат</p>
+        <img class="final-screen__photo" src="public/brend.jpg" alt="Бренд" />
+        <h1 class="final-screen__title">ТЫ БРЕНД</h1>
+        <button class="button button--primary button--wide" type="button" id="brandResultButton">
+          Я так и знал
+        </button>
+      </section>
+
+      <section class="quiz__panel talent-screen" id="talentScreen" hidden>
+        <h1 class="talent-screen__title">
+          Вот мы и узнали насколько ты креативный со своими ответами, можешь теперь
+          продемонстрировать свой талант в живую
+        </h1>
+        <button class="button button--primary button--wide" type="button" id="talentButton">
+          Продемонстировать
+        </button>
+      </section>
+
+      <section class="quiz__panel gift-question-screen" id="giftQuestionScreen" hidden>
+        <h1 class="gift-question-screen__title">
+          Все подсказки получены, вернемся к главному вопросу: что мы тебе дарим?
+        </h1>
+        <div class="gift-question-screen__actions">
+          <button class="button button--primary button--wide" type="button" id="giftUnderstoodButton">
+            Я понял, что вы мне дарите
+          </button>
+          <button class="button button--secondary button--wide" type="button" id="giftNotUnderstoodButton">
+            Я не понял что вы мне дарите
+          </button>
+        </div>
+      </section>
+
+      <section class="quiz__panel team-farewell-screen" id="teamFarewellScreen" hidden>
+        <h1 class="team-farewell-screen__title">
+          С вами была команда по придумыванию саняориентированных тестов
+        </h1>
+        <div class="kittens" aria-label="Команда по придумыванию тестов">
+          <img class="kittens__photo" src="public/me.jpg" alt="Первый участник команды" />
+          <img class="kittens__photo" src="public/grisha.jpg" alt="Второй участник команды" />
+          <img class="kittens__photo" src="public/egor.jpg" alt="Третий участник команды" />
+          <img class="kittens__photo" src="public/ura.jpg" alt="Четвертый участник команды" />
+        </div>
+        <p class="team-farewell-screen__text">До новых встреч</p>
+      </section>
     </main>
 
-    <aside class="debug-panel" aria-label="Дебаг переключатель экранов">
+    <aside class="debug-panel is-hidden" aria-label="Дебаг переключатель экранов">
       <button type="button" data-debug-screen="start">Старт</button>
       <button type="button" data-debug-screen="ready">Готов?</button>
       <button type="button" data-debug-screen="reveal">Извне</button>
@@ -217,6 +308,13 @@
       <button type="button" data-debug-screen="rotate">Поворот</button>
       <button type="button" data-debug-screen="game">Игра</button>
       <button type="button" data-debug-screen="test2">Тест 2</button>
+      <button type="button" data-debug-screen="test3">Тест 3</button>
+      <button type="button" data-debug-screen="after-game">После игры</button>
+      <button type="button" data-debug-screen="after-test2">После теста 2</button>
+      <button type="button" data-debug-screen="brand">Бренд</button>
+      <button type="button" data-debug-screen="talent">Талант</button>
+      <button type="button" data-debug-screen="gift">Подарок?</button>
+      <button type="button" data-debug-screen="farewell">Финал</button>
     </aside>
 
     <script src="questions-config.js"></script>

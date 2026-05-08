@@ -55,7 +55,11 @@ input {
 .final-screen,
 .rotate-screen,
 .second-intro-screen,
-.second-warning-screen {
+.second-warning-screen,
+.third-intro-screen,
+.talent-screen,
+.gift-question-screen,
+.team-farewell-screen {
   text-align: center;
 }
 
@@ -65,10 +69,40 @@ input {
 .final-screen__title,
 .rotate-screen__title,
 .second-intro-screen__title,
-.second-warning-screen__title {
+.second-warning-screen__title,
+.third-intro-screen__title,
+.talent-screen__title,
+.gift-question-screen__title,
+.team-farewell-screen__title {
   margin: 0;
   font-size: clamp(34px, 6vw, 58px);
   line-height: 1.05;
+}
+
+.third-intro-screen__title,
+.talent-screen__title,
+.gift-question-screen__title,
+.team-farewell-screen__title {
+  font-size: clamp(36px, 7vw, 72px);
+}
+
+.gift-question-screen__actions {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.gift-question-screen__actions .button--wide {
+  margin-top: 0;
+}
+
+.team-farewell-screen__text {
+  margin: 34px 0 0;
+  color: #e2764d;
+  font-size: clamp(32px, 7vw, 68px);
+  font-weight: 900;
+  line-height: 1;
 }
 
 .second-intro-screen__image {
@@ -508,21 +542,25 @@ input {
 
 .debug-panel {
   position: fixed;
-  right: 12px;
-  bottom: 12px;
+  top: max(8px, env(safe-area-inset-top));
+  left: 50%;
   z-index: 20;
   display: flex;
-  max-width: min(520px, calc(100vw - 24px));
-  flex-wrap: wrap;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  overflow-x: auto;
+  flex-wrap: nowrap;
   gap: 6px;
   padding: 8px;
   border: 1px solid rgba(31, 35, 40, 0.16);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 12px 32px rgba(42, 50, 66, 0.18);
+  transform: translateX(-50%);
 }
 
 .debug-panel button {
+  flex: 0 0 auto;
   min-height: 30px;
   padding: 0 10px;
   border: 1px solid #c8d0d9;
@@ -537,6 +575,22 @@ input {
 .debug-panel button:hover {
   border-color: #24786c;
   color: #24786c;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.debug-toggle {
+  position: absolute;
+  top: 96px;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: default;
 }
 
 .game-screen {
@@ -953,8 +1007,8 @@ input {
   background: #18331f;
 }
 
-.is-mobile-game .debug-panel {
-  display: none;
+.is-mobile-game .debug-panel:not(.is-hidden) {
+  display: flex;
 }
 
 @media (orientation: portrait) and (pointer: coarse) {
@@ -973,8 +1027,10 @@ input {
     transform-origin: center;
   }
 
-  .debug-panel {
-    display: none;
+  .debug-panel:not(.is-hidden) {
+    display: flex;
+    max-width: calc(100vw - 12px);
+    padding: 6px;
   }
 }
 

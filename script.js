@@ -8,6 +8,12 @@ const gameScreen = document.querySelector("#gameScreen");
 const secondIntroScreen = document.querySelector("#secondIntroScreen");
 const secondWarningScreen = document.querySelector("#secondWarningScreen");
 const secondTestScreen = document.querySelector("#secondTestScreen");
+const thirdIntroScreen = document.querySelector("#thirdIntroScreen");
+const thirdTestScreen = document.querySelector("#thirdTestScreen");
+const brandResultScreen = document.querySelector("#brandResultScreen");
+const talentScreen = document.querySelector("#talentScreen");
+const giftQuestionScreen = document.querySelector("#giftQuestionScreen");
+const teamFarewellScreen = document.querySelector("#teamFarewellScreen");
 const startButton = document.querySelector("#startButton");
 const readyButton = document.querySelector("#readyButton");
 const revealButton = document.querySelector("#revealButton");
@@ -25,18 +31,35 @@ const restartButton = document.querySelector("#restartButton");
 const continueButton = document.querySelector("#continueButton");
 const secondIntroButton = document.querySelector("#secondIntroButton");
 const secondWarningButton = document.querySelector("#secondWarningButton");
+const thirdIntroButton = document.querySelector("#thirdIntroButton");
+const brandResultButton = document.querySelector("#brandResultButton");
+const talentButton = document.querySelector("#talentButton");
+const giftUnderstoodButton = document.querySelector("#giftUnderstoodButton");
+const giftNotUnderstoodButton = document.querySelector("#giftNotUnderstoodButton");
 const secondProgressText = document.querySelector("#secondProgressText");
 const secondProgressPercent = document.querySelector("#secondProgressPercent");
 const secondProgressBar = document.querySelector("#secondProgressBar");
 const secondQuestionTitle = document.querySelector("#secondQuestionTitle");
+const secondQuestionImageWrap = document.querySelector("#secondQuestionImageWrap");
+const secondQuestionImage = document.querySelector("#secondQuestionImage");
 const secondAnswerInput = document.querySelector("#secondAnswerInput");
 const secondStatusText = document.querySelector("#secondStatusText");
 const secondPrevButton = document.querySelector("#secondPrevButton");
 const secondNextButton = document.querySelector("#secondNextButton");
+const thirdProgressText = document.querySelector("#thirdProgressText");
+const thirdProgressPercent = document.querySelector("#thirdProgressPercent");
+const thirdProgressBar = document.querySelector("#thirdProgressBar");
+const thirdQuestionTitle = document.querySelector("#thirdQuestionTitle");
+const thirdAnswersForm = document.querySelector("#thirdAnswersForm");
+const thirdStatusText = document.querySelector("#thirdStatusText");
+const thirdPrevButton = document.querySelector("#thirdPrevButton");
+const thirdNextButton = document.querySelector("#thirdNextButton");
 const moveLeftButton = document.querySelector("#moveLeftButton");
 const moveRightButton = document.querySelector("#moveRightButton");
 const shootButton = document.querySelector("#shootButton");
 const flamethrower = document.querySelector(".hero__flamethrower");
+const debugPanel = document.querySelector(".debug-panel");
+const debugToggle = document.querySelector("#debugToggle");
 const debugButtons = document.querySelectorAll("[data-debug-screen]");
 const progressText = document.querySelector("#progressText");
 const progressPercent = document.querySelector("#progressPercent");
@@ -65,16 +88,132 @@ let flames = [];
 let lastShotTime = 0;
 let currentSecondQuestionIndex = 0;
 let secondAnswers = [];
+let currentThirdQuestionIndex = 0;
+let thirdAnswers = [];
 
 const waveSizes = [20, 20, 20];
 const secondQuestions = [
-  "Каким бизнесом занималась семья Фогги Нейльсана?",
-  "Сколько линчевателей ты знаешь в сериале Сорвиголова?",
-  "Какое блюдо Кингпинк ест на завтрак?",
-  "Какой персонаж является самым горячим в сериале Сорвиголова?",
-  "Какую часть тела стик избавился, чтобы сбежать из западни красной руки?",
-  "Представь ты повар мэра Фиска, и от твоего блюда зависела твоя жизнь, то чтобы ты приготовил на ужин?",
-  "Какой порт был важен для Фикса, в сериале Сорвиголова: рожденный заново?",
+  {
+    text: "Каким бизнесом занималась семья Фогги Нейльсана?",
+    image: "public/mem_2.jpg",
+    imageAlt: "Мем к первому вопросу второго теста",
+  },
+  {
+    text: "Сколько линчевателей ты знаешь в сериале Сорвиголова?",
+    image: "public/mem_3.jpg",
+    imageAlt: "Мем ко второму вопросу второго теста",
+  },
+  {
+    text: "Какое блюдо Кингпинк ест на завтрак?",
+    image: "public/mem_4.jpg",
+    imageAlt: "Мем к третьему вопросу второго теста",
+  },
+  {
+    text: "Какой персонаж является самым горячим в сериале Сорвиголова?",
+  },
+  {
+    text: "Какую часть тела стик избавился, чтобы сбежать из западни красной руки?",
+    image: "public/mem_1.jpg",
+    imageAlt: "Мем к пятому вопросу второго теста",
+  },
+  {
+    text: "Представь ты повар мэра Фиска, и от твоего блюда зависела твоя жизнь, то чтобы ты приготовил на ужин?",
+  },
+  {
+    text: "Какой порт был важен для Фикса, в сериале Сорвиголова: рожденный заново?",
+  },
+];
+const thirdQuestions = [
+  {
+    text: "Как ты обычно решаешь проблемы?",
+    answers: [
+      "Долго терплю, коплю в себе, а потом срываюсь одним мощным взрывом.",
+      "Думаю о том, как мои действия повлияют на других, и ищу компромисс.",
+      "Методично и холодно ищу решение, шаг за шагом, пока проблема не исчезнет.",
+      "Быстро реагирую и импровизирую, даже если это приводит к хаосу вокруг.",
+    ],
+  },
+  {
+    text: "Какой стиль общения тебе ближе?",
+    answers: [
+      "Я немногословен, но если уж говорю, то прямо и обжигающе, люди обижаются.",
+      "Стараюсь быть душой компании, чтобы все \"горели\" энтузиазмом.",
+      "Говорю по делу, не терплю пустой болтовни, она меня \"выжигает\" изнутри.",
+      "Обожаю спорить, подкидывать дровишки в чужой конфликт и смотреть, как разгорается пламя.",
+    ],
+  },
+  {
+    text: "Какая цитата тебе ближе всего?",
+    answers: [
+      "\"Ты можешь быть хоть водой, но я заставлю тебя закипеть и испариться\".",
+      "\"Огонь в моей душе не погаснет, даже если весь мир будет против\".",
+      "\"Я родился в пламени и не боюсь сгореть в нем снова\".",
+      "\"Там, где прошел я, остается только пепел\".",
+    ],
+  },
+  {
+    text: "Что выводит тебя из себя быстрее всего?",
+    answers: [
+      "Когда меня игнорируют или недооценивают. Они еще увидят мой фитиль!",
+      "Предательство близких. Месть будет долгой и мучительной.",
+      "Тупые правила и бюрократия. Хочется просто все сжечь.",
+      "Когда трогают мои вещи или нарушают мои планы.",
+    ],
+  },
+  {
+    text: "Что бы ты предпочел в бою/споре?",
+    answers: [
+      "Подождать, пока соперники устанут ссориться друг с другом, а потом поджечь фитиль.",
+      "Ослепить противника своей харизмой и добить эффектной фразой.",
+      "Поджарить всех скопом, не вникая, кто прав, кто виноват.",
+      "Сконцентрироваться на одной цели и прожигать ее, пока не останется углей.",
+    ],
+  },
+  {
+    text: "Какая стихия тебе ближе по духу?",
+    answers: [
+      "Терпение земли.",
+      "Ярость урагана.",
+      "Чистое, всепоглощающее пламя.",
+      "Магия проклятого.",
+    ],
+  },
+  {
+    text: "Что ты чувствуешь, когда очень зол?",
+    answers: [
+      "Мне кажется, что мои руки и слова буквально жгут все, к чему прикасаются.",
+      "Я становлюсь очень громким и неконтролируемым.",
+      "Внешне я спокоен, но внутри все превращается в пепел.",
+      "Я чувствую странное воодушевление, хочется, чтобы мир горел вместе со мной.",
+    ],
+  },
+  {
+    text: "Какова твоя роль в команде друзей?",
+    answers: [
+      "Затворник-одиночка, которого все немного побаиваются, но ценят за мощь в трудную минуту.",
+      "Зажигалка, без меня всем скучно, я инициатор движа.",
+      "Судья в последней инстанции. Если я вмешался - все сгорит, мало не покажется никому.",
+      "Философ, который любит напоминать, что все тлен и все там будем.",
+    ],
+  },
+  {
+    text: "Опиши свой идеальный гнев...",
+    answers: [
+      "Когда у тебя внутри полыхает пожар, который ты контролируешь, пока не направишь его на обидчика.",
+      "Эмоциональный, но короткий.",
+      "Бесконечный. Ты можешь гореть обидой вечность.",
+      "Красивый и устрашающий.",
+    ],
+  },
+  {
+    text: "Если бы ты был духом, заключенным в темнице, что бы ты делал?",
+    answers: [
+      "Спал бы тысячелетиями, накапливая ярость для побега.",
+      "Пытался бы докричаться до тех, кто проходит мимо, манипулируя ими.",
+      "Горел бы в собственном огне, мечтая вырваться и сжечь тюремщика.",
+      "Терпеливо ждал бы дурака, который снимет печать.",
+    ],
+  },
 ];
 const pressedKeys = {
   left: false,
@@ -92,6 +231,12 @@ function showScreen(screen) {
   secondIntroScreen.hidden = screen !== secondIntroScreen;
   secondWarningScreen.hidden = screen !== secondWarningScreen;
   secondTestScreen.hidden = screen !== secondTestScreen;
+  thirdIntroScreen.hidden = screen !== thirdIntroScreen;
+  thirdTestScreen.hidden = screen !== thirdTestScreen;
+  brandResultScreen.hidden = screen !== brandResultScreen;
+  talentScreen.hidden = screen !== talentScreen;
+  giftQuestionScreen.hidden = screen !== giftQuestionScreen;
+  teamFarewellScreen.hidden = screen !== teamFarewellScreen;
 }
 
 function loadQuestions() {
@@ -498,14 +643,26 @@ function startSecondTest() {
 function renderSecondQuestion() {
   const questionNumber = currentSecondQuestionIndex + 1;
   const totalQuestions = secondQuestions.length;
+  const question = secondQuestions[currentSecondQuestionIndex];
   const progress = Math.round(((questionNumber - 1) / totalQuestions) * 100);
 
   secondProgressText.textContent = `Вопрос ${questionNumber} из ${totalQuestions}`;
   secondProgressPercent.textContent = `${progress}%`;
   secondProgressBar.style.width = `${progress}%`;
-  secondQuestionTitle.textContent = secondQuestions[currentSecondQuestionIndex];
+  secondQuestionTitle.textContent = question.text;
   secondAnswerInput.value = secondAnswers[currentSecondQuestionIndex] || "";
   secondStatusText.textContent = "";
+
+  if (question.image) {
+    secondQuestionImage.src = question.image;
+    secondQuestionImage.alt = question.imageAlt || question.text;
+    secondQuestionImageWrap.hidden = false;
+  } else {
+    secondQuestionImage.removeAttribute("src");
+    secondQuestionImage.alt = "";
+    secondQuestionImageWrap.hidden = true;
+  }
+
   secondPrevButton.disabled = currentSecondQuestionIndex === 0;
   secondNextButton.textContent =
     currentSecondQuestionIndex === secondQuestions.length - 1 ? "Завершить" : "Далее";
@@ -535,20 +692,98 @@ function goToNextSecondQuestion() {
   }
 
   if (currentSecondQuestionIndex === secondQuestions.length - 1) {
-    secondProgressText.textContent = `Готово: ${secondQuestions.length} из ${secondQuestions.length}`;
-    secondProgressPercent.textContent = "100%";
-    secondProgressBar.style.width = "100%";
-    secondQuestionTitle.textContent = "Второй тест завершен";
-    secondAnswerInput.value = "";
-    secondAnswerInput.disabled = true;
-    secondStatusText.textContent = "Ответы сохранены на этой странице.";
-    secondNextButton.disabled = true;
+    showScreen(thirdIntroScreen);
     return;
   }
 
   currentSecondQuestionIndex += 1;
   renderSecondQuestion();
   secondAnswerInput.focus();
+}
+
+function startThirdTest() {
+  currentThirdQuestionIndex = 0;
+
+  if (thirdAnswers.length !== thirdQuestions.length) {
+    thirdAnswers = Array(thirdQuestions.length).fill(null);
+  }
+
+  renderThirdQuestion();
+  showScreen(thirdTestScreen);
+}
+
+function renderThirdQuestion() {
+  const questionNumber = currentThirdQuestionIndex + 1;
+  const totalQuestions = thirdQuestions.length;
+  const question = thirdQuestions[currentThirdQuestionIndex];
+  const progress = Math.round(((questionNumber - 1) / totalQuestions) * 100);
+
+  thirdProgressText.textContent = `Вопрос ${questionNumber} из ${totalQuestions}`;
+  thirdProgressPercent.textContent = `${progress}%`;
+  thirdProgressBar.style.width = `${progress}%`;
+  thirdQuestionTitle.textContent = question.text;
+  thirdStatusText.textContent = "";
+  thirdAnswersForm.innerHTML = "";
+
+  question.answers.forEach((answer, index) => {
+    const optionId = `third-answer-${currentThirdQuestionIndex}-${index}`;
+    const answerId = ["a", "b", "c", "d"][index];
+    const label = document.createElement("label");
+    label.className = "answer";
+    label.setAttribute("for", optionId);
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "third-answer";
+    input.id = optionId;
+    input.value = answerId;
+    input.checked = thirdAnswers[currentThirdQuestionIndex] === answerId;
+
+    input.addEventListener("change", () => {
+      thirdAnswers[currentThirdQuestionIndex] = answerId;
+      thirdStatusText.textContent = "";
+    });
+
+    const text = document.createElement("span");
+    text.className = "answer__text";
+    text.textContent = `${answerId.toUpperCase()}) ${answer}`;
+
+    label.append(input, text);
+    thirdAnswersForm.append(label);
+  });
+
+  thirdPrevButton.disabled = currentThirdQuestionIndex === 0;
+  thirdNextButton.textContent =
+    currentThirdQuestionIndex === thirdQuestions.length - 1 ? "Завершить" : "Далее";
+}
+
+function goToPreviousThirdQuestion() {
+  if (currentThirdQuestionIndex === 0) {
+    return;
+  }
+
+  currentThirdQuestionIndex -= 1;
+  renderThirdQuestion();
+}
+
+function goToNextThirdQuestion() {
+  if (!thirdAnswers[currentThirdQuestionIndex]) {
+    thirdStatusText.textContent = "Выбери вариант ответа, чтобы продолжить.";
+    return;
+  }
+
+  if (currentThirdQuestionIndex === thirdQuestions.length - 1) {
+    showBrandResult();
+    return;
+  }
+
+  currentThirdQuestionIndex += 1;
+  renderThirdQuestion();
+}
+
+function showBrandResult() {
+  launchConfetti();
+  showScreen(brandResultScreen);
 }
 
 function setMove(direction, isPressed) {
@@ -589,6 +824,24 @@ secondIntroButton.addEventListener("click", () => {
   showScreen(secondWarningScreen);
 });
 secondWarningButton.addEventListener("click", startSecondTest);
+thirdIntroButton.addEventListener("click", startThirdTest);
+thirdPrevButton.addEventListener("click", goToPreviousThirdQuestion);
+thirdNextButton.addEventListener("click", goToNextThirdQuestion);
+brandResultButton.addEventListener("click", () => {
+  showScreen(talentScreen);
+});
+talentButton.addEventListener("click", () => {
+  showScreen(giftQuestionScreen);
+});
+debugToggle.addEventListener("click", () => {
+  debugPanel.classList.toggle("is-hidden");
+});
+giftUnderstoodButton.addEventListener("click", () => {
+  showScreen(teamFarewellScreen);
+});
+giftNotUnderstoodButton.addEventListener("click", () => {
+  showScreen(teamFarewellScreen);
+});
 secondPrevButton.addEventListener("click", goToPreviousSecondQuestion);
 secondNextButton.addEventListener("click", goToNextSecondQuestion);
 secondAnswerInput.addEventListener("keydown", (event) => {
@@ -679,6 +932,34 @@ debugButtons.forEach((button) => {
 
     if (screenName === "test2") {
       startSecondTest();
+    }
+
+    if (screenName === "test3") {
+      startThirdTest();
+    }
+
+    if (screenName === "after-game") {
+      showScreen(secondIntroScreen);
+    }
+
+    if (screenName === "after-test2") {
+      showScreen(thirdIntroScreen);
+    }
+
+    if (screenName === "brand") {
+      showBrandResult();
+    }
+
+    if (screenName === "talent") {
+      showScreen(talentScreen);
+    }
+
+    if (screenName === "gift") {
+      showScreen(giftQuestionScreen);
+    }
+
+    if (screenName === "farewell") {
+      showScreen(teamFarewellScreen);
     }
   });
 });
