@@ -242,7 +242,7 @@ function spawnWave() {
     enemies.push({
       element: enemy,
       x,
-      width: 92,
+      width: 184,
       health: 1,
       side,
       speed: 132 + currentWaveIndex * 42 + index * 3,
@@ -352,8 +352,8 @@ function checkCollisions() {
     flames.forEach((flame) => {
       const flameLeft = flame.x;
       const flameRight = flame.x + flame.width;
-      const enemyLeft = enemy.x + 12;
-      const enemyRight = enemy.x + enemy.width - 12;
+      const enemyLeft = enemy.x + 24;
+      const enemyRight = enemy.x + enemy.width - 24;
 
       if (flameRight >= enemyLeft && flameLeft <= enemyRight) {
         enemy.health = 0;
@@ -364,8 +364,8 @@ function checkCollisions() {
 
     const heroLeft = heroX + 36;
     const heroRight = heroX + hero.offsetWidth - 36;
-    const enemyLeft = enemy.x + 18;
-    const enemyRight = enemy.x + enemy.width - 18;
+    const enemyLeft = enemy.x + 36;
+    const enemyRight = enemy.x + enemy.width - 36;
 
     if (enemy.health > 0 && enemyRight >= heroLeft && enemyLeft <= heroRight) {
       loseGame();

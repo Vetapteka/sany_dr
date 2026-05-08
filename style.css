@@ -702,8 +702,8 @@ input {
   bottom: calc(21% - 4px);
   left: 0;
   z-index: 2;
-  width: 92px;
-  height: 112px;
+  width: 184px;
+  height: 224px;
   background: url("public/a_1.png") center bottom / contain no-repeat;
   transform-origin: 50% 100%;
   will-change: transform;
@@ -887,5 +887,26 @@ input {
 
   .button {
     width: 100%;
+  }
+}
+
+@media (orientation: portrait) and (pointer: coarse) {
+  .game-screen {
+    background: #18331f;
+  }
+
+  .game-world {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100dvh;
+    height: 100dvw;
+    min-height: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center;
+  }
+
+  .debug-panel {
+    display: none;
   }
 }
