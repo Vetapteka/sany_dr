@@ -5,6 +5,9 @@ const questionScreen = document.querySelector("#questionScreen");
 const finalScreen = document.querySelector("#finalScreen");
 const rotateScreen = document.querySelector("#rotateScreen");
 const gameScreen = document.querySelector("#gameScreen");
+const secondIntroScreen = document.querySelector("#secondIntroScreen");
+const secondWarningScreen = document.querySelector("#secondWarningScreen");
+const secondTestScreen = document.querySelector("#secondTestScreen");
 const startButton = document.querySelector("#startButton");
 const readyButton = document.querySelector("#readyButton");
 const revealButton = document.querySelector("#revealButton");
@@ -20,6 +23,16 @@ const gameOverOverlay = document.querySelector("#gameOverOverlay");
 const gameWinOverlay = document.querySelector("#gameWinOverlay");
 const restartButton = document.querySelector("#restartButton");
 const continueButton = document.querySelector("#continueButton");
+const secondIntroButton = document.querySelector("#secondIntroButton");
+const secondWarningButton = document.querySelector("#secondWarningButton");
+const secondProgressText = document.querySelector("#secondProgressText");
+const secondProgressPercent = document.querySelector("#secondProgressPercent");
+const secondProgressBar = document.querySelector("#secondProgressBar");
+const secondQuestionTitle = document.querySelector("#secondQuestionTitle");
+const secondAnswerInput = document.querySelector("#secondAnswerInput");
+const secondStatusText = document.querySelector("#secondStatusText");
+const secondPrevButton = document.querySelector("#secondPrevButton");
+const secondNextButton = document.querySelector("#secondNextButton");
 const moveLeftButton = document.querySelector("#moveLeftButton");
 const moveRightButton = document.querySelector("#moveRightButton");
 const shootButton = document.querySelector("#shootButton");
@@ -50,8 +63,19 @@ let currentWaveIndex = 0;
 let enemies = [];
 let flames = [];
 let lastShotTime = 0;
+let currentSecondQuestionIndex = 0;
+let secondAnswers = [];
 
 const waveSizes = [20, 20, 20];
+const secondQuestions = [
+  "Каким бизнесом занималась семья Фогги Нейльсана?",
+  "Сколько линчевателей ты знаешь в сериале Сорвиголова?",
+  "Какое блюдо Кингпинк ест на завтрак?",
+  "Какой персонаж является самым горячим в сериале Сорвиголова?",
+  "Какую часть тела стик избавился, чтобы сбежать из западни красной руки?",
+  "Представь ты повар мэра Фиска, и от твоего блюда зависела твоя жизнь, то чтобы ты приготовил на ужин?",
+  "Какой порт был важен для Фикса, в сериале Сорвиголова: рожденный заново?",
+];
 const pressedKeys = {
   left: false,
   right: false,
@@ -65,6 +89,9 @@ function showScreen(screen) {
   finalScreen.hidden = screen !== finalScreen;
   rotateScreen.hidden = screen !== rotateScreen;
   gameScreen.hidden = screen !== gameScreen;
+  secondIntroScreen.hidden = screen !== secondIntroScreen;
+  secondWarningScreen.hidden = screen !== secondWarningScreen;
+  secondTestScreen.hidden = screen !== secondTestScreen;
 }
 
 function loadQuestions() {
@@ -279,7 +306,7 @@ function spawnWave() {
       width: 184,
       health: 1,
       side,
-      speed: 132 + currentWaveIndex * 42 + index * 3,
+      speed: 82 + currentWaveIndex * 26 + index * 2,
     });
   }
 }
@@ -456,6 +483,74 @@ function winGame() {
   gameWinOverlay.hidden = false;
 }
 
+function startSecondTest() {
+  currentSecondQuestionIndex = 0;
+
+  if (secondAnswers.length !== secondQuestions.length) {
+    secondAnswers = Array(secondQuestions.length).fill("");
+  }
+
+  renderSecondQuestion();
+  showScreen(secondTestScreen);
+  secondAnswerInput.focus();
+}
+
+function renderSecondQuestion() {
+  const questionNumber = currentSecondQuestionIndex + 1;
+  const totalQuestions = secondQuestions.length;
+  const progress = Math.round(((questionNumber - 1) / totalQuestions) * 100);
+
+  secondProgressText.textContent = `Вопрос ${questionNumber} из ${totalQuestions}`;
+  secondProgressPercent.textContent = `${progress}%`;
+  secondProgressBar.style.width = `${progress}%`;
+  secondQuestionTitle.textContent = secondQuestions[currentSecondQuestionIndex];
+  secondAnswerInput.value = secondAnswers[currentSecondQuestionIndex] || "";
+  secondStatusText.textContent = "";
+  secondPrevButton.disabled = currentSecondQuestionIndex === 0;
+  secondNextButton.textContent =
+    currentSecondQuestionIndex === secondQuestions.length - 1 ? "Завершить" : "Далее";
+}
+
+function saveSecondAnswer() {
+  secondAnswers[currentSecondQuestionIndex] = secondAnswerInput.value.trim();
+}
+
+function goToPreviousSecondQuestion() {
+  if (currentSecondQuestionIndex === 0) {
+    return;
+  }
+
+  saveSecondAnswer();
+  currentSecondQuestionIndex -= 1;
+  renderSecondQuestion();
+  secondAnswerInput.focus();
+}
+
+function goToNextSecondQuestion() {
+  saveSecondAnswer();
+
+  if (!secondAnswers[currentSecondQuestionIndex]) {
+    secondStatusText.textContent = "Введи ответ, чтобы продолжить.";
+    return;
+  }
+
+  if (currentSecondQuestionIndex === secondQuestions.length - 1) {
+    secondProgressText.textContent = `Готово: ${secondQuestions.length} из ${secondQuestions.length}`;
+    secondProgressPercent.textContent = "100%";
+    secondProgressBar.style.width = "100%";
+    secondQuestionTitle.textContent = "Второй тест завершен";
+    secondAnswerInput.value = "";
+    secondAnswerInput.disabled = true;
+    secondStatusText.textContent = "Ответы сохранены на этой странице.";
+    secondNextButton.disabled = true;
+    return;
+  }
+
+  currentSecondQuestionIndex += 1;
+  renderSecondQuestion();
+  secondAnswerInput.focus();
+}
+
 function setMove(direction, isPressed) {
   if (gameState !== "playing") {
     pressedKeys[direction] = false;
@@ -488,7 +583,19 @@ finalButton.addEventListener("click", () => {
 boydButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", resetGame);
 continueButton.addEventListener("click", () => {
-  continueButton.textContent = "Продолжение скоро";
+  showScreen(secondIntroScreen);
+});
+secondIntroButton.addEventListener("click", () => {
+  showScreen(secondWarningScreen);
+});
+secondWarningButton.addEventListener("click", startSecondTest);
+secondPrevButton.addEventListener("click", goToPreviousSecondQuestion);
+secondNextButton.addEventListener("click", goToNextSecondQuestion);
+secondAnswerInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    goToNextSecondQuestion();
+  }
 });
 
 bindHoldButton(moveLeftButton, () => setMove("left", true), () => setMove("left", false));
@@ -568,6 +675,10 @@ debugButtons.forEach((button) => {
 
     if (screenName === "game") {
       startGame();
+    }
+
+    if (screenName === "test2") {
+      startSecondTest();
     }
   });
 });

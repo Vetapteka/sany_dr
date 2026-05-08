@@ -155,6 +155,57 @@
           </div>
         </div>
       </section>
+
+      <section class="quiz__panel second-intro-screen" id="secondIntroScreen" hidden>
+        <h1 class="second-intro-screen__title">
+          Ты победил ебак, но увлекательные тесты еще не закончились
+        </h1>
+        <img class="second-intro-screen__image" src="public/test_2.jpg" alt="Второй тест" />
+        <button class="button button--primary button--wide" type="button" id="secondIntroButton">
+          Давайте
+        </button>
+      </section>
+
+      <section class="quiz__panel second-warning-screen" id="secondWarningScreen" hidden>
+        <h1 class="second-warning-screen__title">
+          Будь внимательнее к вопросам и к ответам
+        </h1>
+        <p class="second-warning-screen__accent">Так сказать НАПОДУМАТЬ ;)</p>
+        <button class="button button--primary button--wide" type="button" id="secondWarningButton">
+          Давайте
+        </button>
+      </section>
+
+      <section class="quiz__panel second-test-screen" id="secondTestScreen" hidden>
+        <div class="quiz__top">
+          <div class="progress" aria-label="Прогресс второго теста">
+            <div class="progress__meta">
+              <span id="secondProgressText">Вопрос 1 из 7</span>
+              <span id="secondProgressPercent">0%</span>
+            </div>
+            <div class="progress__track">
+              <div class="progress__bar" id="secondProgressBar"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="quiz__tag">Тест 2</p>
+        <h1 class="quiz__question" id="secondQuestionTitle">Загрузка вопроса...</h1>
+        <label class="text-answer">
+          <span>Ответ</span>
+          <input id="secondAnswerInput" type="text" autocomplete="off" />
+        </label>
+        <p class="quiz__status" id="secondStatusText" aria-live="polite"></p>
+
+        <div class="quiz__actions">
+          <button class="button button--secondary" type="button" id="secondPrevButton">
+            Назад
+          </button>
+          <button class="button button--primary" type="button" id="secondNextButton">
+            Далее
+          </button>
+        </div>
+      </section>
     </main>
 
     <aside class="debug-panel" aria-label="Дебаг переключатель экранов">
@@ -165,6 +216,7 @@
       <button type="button" data-debug-screen="final">Финал</button>
       <button type="button" data-debug-screen="rotate">Поворот</button>
       <button type="button" data-debug-screen="game">Игра</button>
+      <button type="button" data-debug-screen="test2">Тест 2</button>
     </aside>
 
     <script src="questions-config.js"></script>

@@ -53,7 +53,9 @@ input {
 .ready-screen,
 .reveal-screen,
 .final-screen,
-.rotate-screen {
+.rotate-screen,
+.second-intro-screen,
+.second-warning-screen {
   text-align: center;
 }
 
@@ -61,10 +63,67 @@ input {
 .ready-screen__title,
 .reveal-screen__title,
 .final-screen__title,
-.rotate-screen__title {
+.rotate-screen__title,
+.second-intro-screen__title,
+.second-warning-screen__title {
   margin: 0;
   font-size: clamp(34px, 6vw, 58px);
   line-height: 1.05;
+}
+
+.second-intro-screen__image {
+  display: block;
+  width: min(100%, 460px);
+  max-height: 360px;
+  margin: 30px auto 0;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f6f8fa;
+}
+
+.second-warning-screen__title {
+  font-size: clamp(44px, 8vw, 84px);
+}
+
+.second-warning-screen__accent {
+  margin: 28px auto 0;
+  color: #e2764d;
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.text-answer {
+  display: grid;
+  gap: 10px;
+  margin-top: 30px;
+  color: #59636e;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.text-answer input {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 18px;
+  border: 1px solid #c8d0d9;
+  border-radius: 8px;
+  color: #1f2328;
+  background: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: none;
+  outline: none;
+}
+
+.text-answer input:focus {
+  border-color: #24786c;
+  box-shadow: 0 0 0 4px rgba(36, 120, 108, 0.14);
+}
+
+.text-answer input:disabled {
+  opacity: 0.6;
 }
 
 .final-screen {
@@ -733,16 +792,16 @@ input {
 
 .mobile-controls {
   position: absolute;
-  bottom: 22px;
-  left: 22px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: max(12px, env(safe-area-inset-left));
   display: flex;
-  gap: 12px;
+  gap: clamp(8px, 2vmin, 12px);
   z-index: 6;
 }
 
 .mobile-controls__button {
-  width: 72px;
-  height: 72px;
+  width: clamp(52px, 11vmin, 72px);
+  height: clamp(52px, 11vmin, 72px);
   border: 2px solid rgba(31, 35, 40, 0.22);
   border-radius: 50%;
   color: #ffffff;
@@ -761,11 +820,11 @@ input {
 
 .shoot-button {
   position: absolute;
-  right: 26px;
-  bottom: 24px;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 6;
-  width: 82px;
-  height: 82px;
+  width: clamp(58px, 12vmin, 82px);
+  height: clamp(58px, 12vmin, 82px);
   border: 2px solid rgba(31, 35, 40, 0.22);
   border-radius: 50%;
   color: #ffffff;
@@ -929,5 +988,15 @@ input {
     min-height: 0;
     transform: translate(-50%, -50%) rotate(90deg);
     transform-origin: center;
+  }
+
+  .is-mobile-game .mobile-controls {
+    bottom: max(10px, env(safe-area-inset-left));
+    left: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .is-mobile-game .shoot-button {
+    right: max(10px, env(safe-area-inset-top));
+    bottom: max(10px, env(safe-area-inset-right));
   }
 }
