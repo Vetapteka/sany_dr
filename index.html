@@ -91,7 +91,81 @@
           Ого, прикольно
         </button>
       </section>
+
+      <section class="quiz__panel rotate-screen" id="rotateScreen" hidden>
+        <div class="rotate-screen__icon" aria-hidden="true">
+          <span class="rotate-screen__phone"></span>
+          <span class="rotate-screen__arrow"></span>
+        </div>
+        <h1 class="rotate-screen__title">Переверни экран</h1>
+        <button class="button button--primary button--wide" type="button" id="boydButton">
+          Я Бойд
+        </button>
+      </section>
+
+      <section class="game-screen" id="gameScreen" hidden>
+        <div class="game-world" id="gameWorld">
+          <div class="game-hud">
+            <div class="health">
+              <span class="health__label">Жизнь</span>
+              <div class="health__track">
+                <div class="health__bar" id="healthBar"></div>
+              </div>
+            </div>
+            <div class="wave-label" id="waveLabel">Волна 1/3</div>
+          </div>
+
+          <div class="game-sky" aria-hidden="true"></div>
+          <div class="game-ground" aria-hidden="true"></div>
+          <div class="hero" id="hero" aria-label="Бойд">
+            <span class="hero__head"></span>
+            <span class="hero__body"></span>
+            <span class="hero__flamethrower"></span>
+            <span class="hero__arm hero__arm--left"></span>
+            <span class="hero__arm hero__arm--right"></span>
+            <span class="hero__leg hero__leg--left"></span>
+            <span class="hero__leg hero__leg--right"></span>
+          </div>
+          <div class="effects-layer" id="effectsLayer" aria-hidden="true"></div>
+          <div class="enemies-layer" id="enemiesLayer" aria-hidden="true"></div>
+          <div class="mobile-controls" aria-label="Управление">
+            <button class="mobile-controls__button" type="button" id="moveLeftButton" aria-label="Влево">
+              ←
+            </button>
+            <button class="mobile-controls__button" type="button" id="moveRightButton" aria-label="Вправо">
+              →
+            </button>
+          </div>
+          <button class="shoot-button" type="button" id="shootButton" aria-label="Стрелять огнем">
+            🔥
+          </button>
+
+          <div class="game-overlay" id="gameOverOverlay" hidden>
+            <h2>Ты проиграл</h2>
+            <button class="button button--primary" type="button" id="restartButton">
+              Заново
+            </button>
+          </div>
+
+          <div class="game-overlay game-overlay--win" id="gameWinOverlay" hidden>
+            <h2>Молодец, хорошо что ты их зажарил</h2>
+            <button class="button button--primary" type="button" id="continueButton">
+              Прикольно, давайте дальше
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <aside class="debug-panel" aria-label="Дебаг переключатель экранов">
+      <button type="button" data-debug-screen="start">Старт</button>
+      <button type="button" data-debug-screen="ready">Готов?</button>
+      <button type="button" data-debug-screen="reveal">Извне</button>
+      <button type="button" data-debug-screen="question">Вопрос</button>
+      <button type="button" data-debug-screen="final">Финал</button>
+      <button type="button" data-debug-screen="rotate">Поворот</button>
+      <button type="button" data-debug-screen="game">Игра</button>
+    </aside>
 
     <script src="questions-config.js"></script>
     <script src="script.js"></script>
