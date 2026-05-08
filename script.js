@@ -183,6 +183,7 @@ function launchConfetti() {
 }
 
 function startGame() {
+  prepareMobileGameView();
   showScreen(gameScreen);
   resetGame();
 
@@ -191,6 +192,39 @@ function startGame() {
     lastFrameTime = performance.now();
     requestAnimationFrame(updateGame);
   }
+}
+
+async function prepareMobileGameView() {
+  if (!isMobileDevice()) {
+    document.body.classList.remove("is-mobile-game");
+    return;
+  }
+
+  document.body.classList.add("is-mobile-game");
+
+  try {
+    if (!document.fullscreenElement && gameScreen.requestFullscreen) {
+      await gameScreen.requestFullscreen();
+    }
+  } catch (error) {
+    console.info("Fullscreen mode is not available on this device.", error);
+  }
+
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock("landscape");
+    }
+  } catch (error) {
+    console.info("Landscape orientation lock is not available on this device.", error);
+  }
+}
+
+function isMobileDevice() {
+  return (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(max-width: 820px)").matches ||
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+  );
 }
 
 function resetGame() {
